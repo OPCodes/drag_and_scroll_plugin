@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1,#div2 {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgb(110,110,50);
+        }
+
+        #div2 {
+            top: 300px;
+            background: rgb(100,50,130);
+        }
+
+        #div2 h2 {
+            margin: 0;
+            width: 100%;
+            height: 30px;
+            background: yellow;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script src="jquery.drag.js"></script>
+    <script>
+        $(function (){
+
+            var obj = {
+                limit: true,   // x,y存在时，true代表限制到指定范围内，x和y不存在时，true代表可视区范围
+                x:{            // 横向范围区域
+                    minX:0,
+                    maxX:500
+                },
+                y:{            // 纵向范围区域
+                    minY:0,
+                    maxY:500
+                }
+            }
+
+            var obj2 = {
+                limit: true,
+                moveEle: "#div2"    // 想要控制的元素
+            }
+
+            $("#div1").drag(obj);
+
+            $("#div1").on("dragStart",function (){  // 给div1绑定一些操作，用trigger("dragStart")触发
+                console.log("div1拖拽开始");
+            });
+
+            $("#div1").on("draging",function (){
+                console.log("div1拖拽中...");
+            });
+
+            $("#div1").on("dragEnd",function (){
+                console.log("div1拖拽结束");
+            });
+
+
+            $("#div2 h2").drag(obj2);
+
+            $("#div2 h2").on("dragStart",function (){ 
+                console.log("div2拖拽开始");
+            });
+
+            $("#div2 h2").on("draging",function (){
+                console.log("div2拖拽中...");
+            });
+
+            $("#div2 h2").on("dragEnd",function (){
+                console.log("div2拖拽结束");
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2">
+        <h2>标题</h2>
+    </div>
+</body>
+</html>
+    
